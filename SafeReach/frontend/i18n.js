@@ -1,0 +1,501 @@
+const DICT = {
+  en: {
+    "app.title": "SafeReach",
+    "app.subtitle": "Nearby shelters and hospitals, saved to this device",
+
+    "status.online": "Online",
+    "status.offline": "Offline",
+    "status.syncing": "Checking for updates",
+    "status.synced": "Up to date",
+    "status.never": "No data yet",
+    "status.updated": "Updated {time}",
+    "status.sources": "From {list}",
+    "status.degraded": "{n} source unavailable",
+    "status.degraded_plural": "{n} sources unavailable",
+
+    "search.radius": "Radius",
+    "search.miles": "mi",
+    "search.near_me": "Search near me",
+    "search.zip": "Search by ZIP",
+    "search.refresh": "Refresh",
+    "search.locating": "Finding your location",
+    "search.working": "Searching within {n} miles",
+    "search.found": "{n} places found",
+    "search.zip_prompt": "Enter a 5-digit ZIP code",
+    "search.zip_invalid": "That isn't a 5-digit ZIP code",
+    "search.zip_notfound": "No match for that ZIP code",
+    "search.zip_failed": "ZIP lookup unavailable. Try search near me.",
+    "search.located": "{city}, {state}",
+    "search.location_secure": "Location access requires HTTPS. Open SafeReach from its secure site or search by ZIP.",
+    "search.location_unsupported": "This browser does not support location access. Search by ZIP instead.",
+    "search.location_denied": "Location permission was denied. Allow location access in browser settings or search by ZIP.",
+    "search.location_unavailable": "Your location could not be determined. Check device location services or search by ZIP.",
+    "search.location_timeout": "Location lookup took too long. Try again or search by ZIP.",
+    "search.failed": "Could not load locations. Check your connection and try again.",
+
+    "filter.shelter": "Shelters",
+    "filter.hospital": "Hospitals",
+
+    "cap.ample": "Room for {n}",
+    "cap.limited": "Room for {n}",
+    "cap.critical": "Room for {n}",
+    "cap.unknown": "Capacity not reported",
+    "cap.label.ample": "High availability",
+    "cap.label.limited": "Moderate availability",
+    "cap.label.critical": "Nearly full",
+    "cap.label.unknown": "Unknown",
+
+    "card.drive": "{miles} mi drive, {min} min",
+    "card.straight": "{miles} mi away",
+    "card.directions": "Directions",
+    "card.hide_directions": "Hide directions",
+    "card.show_map": "Show on map",
+    "card.get_route": "Save route",
+    "card.saving": "Saving",
+    "card.route_failed": "Retry",
+    "card.no_route": "Route not saved",
+    "card.pets": "Pets welcome",
+    "card.source": "Source: {name}",
+    "card.share_route_map": "Share route map",
+    "route.preparing": "Preparing map image…",
+    "route.image_title": "Share route as a map image",
+    "route.steps_heading": "Steps to reach this location",
+    "route.no_steps": "No turn-by-turn steps are available for this route.",
+    "route.more_steps": "{n} more steps not shown",
+    "route.continue": "Continue along the route",
+    "route.share_hint": "Open your device’s share menu and choose AirDrop, Quick Share, Bluetooth, or another nearby option if your device offers it.",
+    "route.attribution_hint": "Map tiles are included when available. If offline or tiles are blocked, a simplified route overview is generated.",
+    "route.save_image": "Save image",
+    "route.share_airdrop": "Share image nearby",
+    "route.start": "START",
+    "route.destination": "DESTINATION",
+    "route.summary": "Driving route overview",
+    "route.need_origin": "Search near you or by ZIP first so the route can start from your location.",
+    "route.need_route": "A saved route is not available. Connect to the internet and try again.",
+    "route.image_failed": "Could not create the route image. Try again.",
+    "route.share_fallback": "This browser cannot share files directly. The PNG was downloaded; use your phone’s Files or Photos share menu to send it.",
+
+    "empty.none": "Search to find shelters near you. Results stay on this device for offline use.",
+    "empty.filtered": "Nothing matches these filters.",
+
+    "share.close": "Close",
+
+    "map.note": "Map images load once per area, then work offline. Details and directions always work offline.",
+
+    "nav.find": "Find",
+    "nav.locations": "Locations",
+    "nav.settings": "Settings",
+    "find.eyebrow": "EMERGENCY LOCATIONS",
+    "find.title": "Find help nearby",
+    "find.subtitle": "Search for shelters and hospitals. Your last results remain available offline.",
+    "locations.eyebrow": "NEARBY RESULTS",
+    "locations.title": "Nearby locations",
+    "locations.subtitle": "Browse shelters and hospitals found by your latest search.",
+    "search.loading": "Loading nearby locations…",
+    "settings.last_saved": "Cached data timestamp: {time}",
+    "settings.eyebrow": "APP PREFERENCES",
+    "settings.title": "Settings",
+    "settings.subtitle": "Choose how SafeReach looks and reads.",
+    "settings.language": "Language",
+    "settings.language_desc": "Change the app language.",
+    "settings.theme": "Appearance",
+    "settings.theme_desc": "Choose light, dark, or follow your device.",
+    "settings.offline_title": "How offline mode works",
+    "settings.offline_desc": "Previously saved locations and map tiles may remain on this device without internet. The data can be out of date, so check the updated time and verify critical information when possible.",
+    "settings.about_title": "About this app",
+
+    "theme.light": "Light",
+    "theme.dark": "Dark",
+    "theme.system": "System",
+    "lang.label": "Language",
+    "settings.no_saved": "No saved data yet. Search while you have a connection.",
+    "settings.about_desc": "SafeReach keeps a local copy of nearby emergency locations and shares route-map images through your device’s share menu."
+  },
+
+  es: {
+    "app.title": "SafeReach",
+    "app.subtitle": "Refugios y hospitales cercanos, guardados en este dispositivo",
+
+    "status.online": "En línea",
+    "status.offline": "Sin conexión",
+    "status.syncing": "Buscando actualizaciones",
+    "status.synced": "Actualizado",
+    "status.never": "Sin datos aún",
+    "status.updated": "Actualizado {time}",
+    "status.sources": "De {list}",
+    "status.degraded": "{n} fuente no disponible",
+    "status.degraded_plural": "{n} fuentes no disponibles",
+
+    "search.radius": "Radio",
+    "search.miles": "mi",
+    "search.near_me": "Buscar cerca de mí",
+    "search.zip": "Buscar por código postal",
+    "search.refresh": "Actualizar",
+    "search.locating": "Localizando tu posición",
+    "search.working": "Buscando en {n} millas",
+    "search.found": "{n} lugares encontrados",
+    "search.zip_prompt": "Ingresa un código postal de 5 dígitos",
+    "search.zip_invalid": "Ese no es un código postal de 5 dígitos",
+    "search.zip_notfound": "No hay resultados para ese código postal",
+    "search.zip_failed": "Búsqueda no disponible. Usa buscar cerca de mí.",
+    "search.located": "{city}, {state}",
+    "search.location_secure": "El acceso a la ubicación requiere HTTPS. Abre SafeReach desde su sitio seguro o busca por código postal.",
+    "search.location_unsupported": "Este navegador no admite el acceso a la ubicación. Busca por código postal.",
+    "search.location_denied": "Se denegó el permiso de ubicación. Permítelo en los ajustes del navegador o busca por código postal.",
+    "search.location_unavailable": "No se pudo determinar tu ubicación. Comprueba los servicios de ubicación o busca por código postal.",
+    "search.location_timeout": "La búsqueda de ubicación tardó demasiado. Inténtalo de nuevo o busca por código postal.",
+    "search.failed": "No se pudieron cargar los lugares. Comprueba tu conexión e inténtalo de nuevo.",
+
+    "filter.shelter": "Refugios",
+    "filter.hospital": "Hospitales",
+
+    "cap.ample": "Espacio para {n}",
+    "cap.limited": "Espacio para {n}",
+    "cap.critical": "Espacio para {n}",
+    "cap.unknown": "Capacidad no informada",
+    "cap.label.ample": "Alta disponibilidad",
+    "cap.label.limited": "Disponibilidad moderada",
+    "cap.label.critical": "Casi lleno",
+    "cap.label.unknown": "Desconocida",
+
+    "card.drive": "{miles} mi en auto, {min} min",
+    "card.straight": "a {miles} mi",
+    "card.directions": "Indicaciones",
+    "card.hide_directions": "Ocultar indicaciones",
+    "card.show_map": "Ver en el mapa",
+    "card.get_route": "Guardar ruta",
+    "card.saving": "Guardando",
+    "card.route_failed": "Reintentar",
+    "card.no_route": "Ruta no guardada",
+    "card.pets": "Admite mascotas",
+    "card.source": "Fuente: {name}",
+    "card.share_route_map": "Compartir mapa de ruta",
+    "route.preparing": "Preparando imagen del mapa…",
+    "route.image_title": "Compartir la ruta como imagen de mapa",
+    "route.steps_heading": "Pasos para llegar a este lugar",
+    "route.no_steps": "No hay indicaciones paso a paso disponibles para esta ruta.",
+    "route.more_steps": "Quedan {n} pasos más",
+    "route.continue": "Continúa por la ruta",
+    "route.share_hint": "Abre el menú para compartir del dispositivo y elige AirDrop, Quick Share, Bluetooth u otra opción cercana si está disponible.",
+    "route.attribution_hint": "Se incluyen mosaicos del mapa cuando están disponibles. Sin conexión, se genera una vista simplificada de la ruta.",
+    "route.save_image": "Guardar imagen",
+    "route.share_airdrop": "Compartir imagen cerca",
+    "route.start": "INICIO",
+    "route.destination": "DESTINO",
+    "route.summary": "Resumen de la ruta en coche",
+    "route.need_origin": "Primero busca cerca de ti o por código postal para definir el punto de partida.",
+    "route.need_route": "No hay una ruta guardada disponible. Conéctate a internet e inténtalo de nuevo.",
+    "route.image_failed": "No se pudo crear la imagen de la ruta. Inténtalo de nuevo.",
+    "route.share_fallback": "Este navegador no puede compartir archivos directamente. Se descargó el PNG; usa el menú Compartir de Archivos o Fotos para enviarlo.",
+
+    "empty.none": "Busca refugios cerca de ti. Los resultados quedan en este dispositivo para uso sin conexión.",
+    "empty.filtered": "Nada coincide con estos filtros.",
+
+    "share.close": "Cerrar",
+
+    "map.note": "Las imágenes del mapa se cargan una vez por zona y luego funcionan sin conexión. Los detalles e indicaciones siempre funcionan sin conexión.",
+
+    "nav.find": "Buscar",
+    "nav.locations": "Lugares",
+    "nav.settings": "Ajustes",
+    "find.eyebrow": "LUGARES DE EMERGENCIA",
+    "find.title": "Encuentra ayuda cerca",
+    "find.subtitle": "Busca refugios y hospitales. Tus últimos resultados siguen disponibles sin conexión.",
+    "locations.eyebrow": "RESULTADOS CERCANOS",
+    "locations.title": "Lugares cercanos",
+    "locations.subtitle": "Consulta los refugios y hospitales encontrados en tu última búsqueda.",
+    "search.loading": "Cargando lugares cercanos…",
+    "settings.last_saved": "Datos guardados el: {time}",
+    "settings.eyebrow": "PREFERENCIAS DE LA APP",
+    "settings.title": "Ajustes",
+    "settings.subtitle": "Elige el aspecto y el idioma de SafeReach.",
+    "settings.language": "Idioma",
+    "settings.language_desc": "Cambia el idioma de la aplicación.",
+    "settings.theme": "Apariencia",
+    "settings.theme_desc": "Elige el modo claro, oscuro o el de tu dispositivo.",
+    "settings.offline_title": "Cómo funciona el modo sin conexión",
+    "settings.offline_desc": "Los lugares y mosaicos de mapa guardados pueden seguir en este dispositivo sin internet. Los datos pueden estar desactualizados; comprueba la fecha y verifica la información importante cuando sea posible.",
+    "settings.about_title": "Acerca de esta aplicación",
+
+    "theme.light": "Claro",
+    "theme.dark": "Oscuro",
+    "theme.system": "Sistema",
+    "lang.label": "Idioma",
+    "settings.no_saved": "Todavía no hay datos guardados. Busca cuando tengas conexión.",
+    "settings.about_desc": "SafeReach guarda una copia local de los lugares de emergencia cercanos y permite compartir imágenes de rutas mediante el menú para compartir del dispositivo."
+  },
+
+  zh: {
+    "app.title": "SafeReach",
+    "app.subtitle": "附近的避难所和医院，已保存到本设备",
+
+    "status.online": "在线",
+    "status.offline": "离线",
+    "status.syncing": "正在检查更新",
+    "status.synced": "已是最新",
+    "status.never": "暂无数据",
+    "status.updated": "更新于 {time}",
+    "status.sources": "来源：{list}",
+    "status.degraded": "{n} 个来源不可用",
+    "status.degraded_plural": "{n} 个来源不可用",
+
+    "search.radius": "范围",
+    "search.miles": "英里",
+    "search.near_me": "搜索附近",
+    "search.zip": "按邮编搜索",
+    "search.refresh": "刷新",
+    "search.locating": "正在定位",
+    "search.working": "正在搜索 {n} 英里内",
+    "search.found": "找到 {n} 个地点",
+    "search.zip_prompt": "请输入 5 位邮政编码",
+    "search.zip_invalid": "这不是 5 位邮政编码",
+    "search.zip_notfound": "未找到该邮政编码",
+    "search.zip_failed": "邮编查询不可用，请改用搜索附近。",
+    "search.located": "{city}，{state}",
+    "search.location_secure": "定位功能需要 HTTPS。请从安全网站打开 SafeReach，或按邮政编码搜索。",
+    "search.location_unsupported": "此浏览器不支持定位。请改用邮政编码搜索。",
+    "search.location_denied": "定位权限被拒绝。请在浏览器设置中允许定位，或按邮政编码搜索。",
+    "search.location_unavailable": "无法确定你的位置。请检查设备定位服务，或按邮政编码搜索。",
+    "search.location_timeout": "定位耗时过长。请重试或按邮政编码搜索。",
+    "search.failed": "无法加载地点。请检查网络连接后重试。",
+
+    "filter.shelter": "避难所",
+    "filter.hospital": "医院",
+
+    "cap.ample": "可容纳 {n} 人",
+    "cap.limited": "可容纳 {n} 人",
+    "cap.critical": "可容纳 {n} 人",
+    "cap.unknown": "未提供容量",
+    "cap.label.ample": "余位充足",
+    "cap.label.limited": "余位有限",
+    "cap.label.critical": "接近满员",
+    "cap.label.unknown": "未知",
+
+    "card.drive": "驾车 {miles} 英里，{min} 分钟",
+    "card.straight": "直线 {miles} 英里",
+    "card.directions": "路线指引",
+    "card.hide_directions": "隐藏指引",
+    "card.show_map": "在地图上显示",
+    "card.get_route": "保存路线",
+    "card.saving": "正在保存",
+    "card.route_failed": "重试",
+    "card.no_route": "未保存路线",
+    "card.pets": "可携带宠物",
+    "card.source": "来源：{name}",
+    "card.share_route_map": "分享路线地图",
+    "route.preparing": "正在生成地图图片…",
+    "route.image_title": "将路线分享为地图图片",
+    "route.steps_heading": "到达此地点的路线步骤",
+    "route.no_steps": "此路线没有可用的逐步导航信息。",
+    "route.more_steps": "另有 {n} 个步骤未显示",
+    "route.continue": "沿路线继续前行",
+    "route.share_hint": "打开设备的系统分享菜单；如果设备支持，可选择 AirDrop、Quick Share、蓝牙或其他附近分享方式。",
+    "route.attribution_hint": "有网络时会包含地图瓦片。离线或瓦片无法加载时，会生成简化路线图。",
+    "route.save_image": "保存图片",
+    "route.share_airdrop": "附近分享图片",
+    "route.start": "起点",
+    "route.destination": "终点",
+    "route.summary": "驾车路线概览",
+    "route.need_origin": "请先使用附近搜索或邮编搜索设置路线起点。",
+    "route.need_route": "没有可用的已保存路线。请连接网络后重试。",
+    "route.image_failed": "无法生成路线图片，请重试。",
+    "route.share_fallback": "此浏览器不支持直接分享文件。PNG 已下载，请使用文件或照片应用的分享菜单发送。",
+
+    "empty.none": "搜索附近的避难所。结果会保存在本设备上，可离线使用。",
+    "empty.filtered": "没有符合筛选条件的结果。",
+
+    "share.close": "关闭",
+
+    "map.note": "地图图像每个区域加载一次，之后可离线使用。详情和路线指引始终可离线查看。",
+
+    "nav.find": "查找",
+    "nav.locations": "地点",
+    "nav.settings": "设置",
+    "find.eyebrow": "紧急地点",
+    "find.title": "查找附近的帮助",
+    "find.subtitle": "搜索避难所和医院。最近的搜索结果会保留在本机，供离线使用。",
+    "locations.eyebrow": "附近结果",
+    "locations.title": "附近地点",
+    "locations.subtitle": "查看上次搜索找到的避难所和医院。",
+    "search.loading": "正在加载附近地点…",
+    "settings.last_saved": "缓存数据时间：{time}",
+    "settings.eyebrow": "应用偏好",
+    "settings.title": "设置",
+    "settings.subtitle": "选择 SafeReach 的外观和语言。",
+    "settings.language": "语言",
+    "settings.language_desc": "更改应用语言。",
+    "settings.theme": "外观",
+    "settings.theme_desc": "选择浅色、深色或跟随设备设置。",
+    "settings.offline_title": "离线模式的工作方式",
+    "settings.offline_desc": "即使没有互联网，先前保存的地点和地图瓦片也可能保留在本机。数据可能过期，请查看更新时间，并尽可能核实重要信息。",
+    "settings.about_title": "关于此应用",
+
+    "theme.light": "浅色",
+    "theme.dark": "深色",
+    "theme.system": "跟随系统",
+    "lang.label": "语言",
+    "settings.no_saved": "尚无已保存数据。请在有网络时搜索。",
+    "settings.about_desc": "SafeReach 会在本机保存附近应急地点，并通过设备的系统分享菜单分享路线地图图片。"
+  },
+
+  hi: {
+    "app.title": "SafeReach",
+    "app.subtitle": "आस-पास के आश्रय स्थल और अस्पताल, इस डिवाइस पर सहेजे गए",
+
+    "status.online": "ऑनलाइन",
+    "status.offline": "ऑफ़लाइन",
+    "status.syncing": "अपडेट देखे जा रहे हैं",
+    "status.synced": "अद्यतन",
+    "status.never": "अभी कोई डेटा नहीं",
+    "status.updated": "{time} को अपडेट किया गया",
+    "status.sources": "स्रोत: {list}",
+    "status.degraded": "{n} स्रोत उपलब्ध नहीं",
+    "status.degraded_plural": "{n} स्रोत उपलब्ध नहीं",
+
+    "search.radius": "दायरा",
+    "search.miles": "मील",
+    "search.near_me": "आस-पास खोजें",
+    "search.zip": "ZIP से खोजें",
+    "search.refresh": "ताज़ा करें",
+    "search.locating": "आपका स्थान पता किया जा रहा है",
+    "search.working": "{n} मील के भीतर खोज जारी",
+    "search.found": "{n} स्थान मिले",
+    "search.zip_prompt": "5 अंकों का ZIP कोड दर्ज करें",
+    "search.zip_invalid": "यह 5 अंकों का ZIP कोड नहीं है",
+    "search.zip_notfound": "इस ZIP कोड का कोई परिणाम नहीं",
+    "search.zip_failed": "ZIP खोज उपलब्ध नहीं। आस-पास खोजें का उपयोग करें।",
+    "search.located": "{city}, {state}",
+    "search.location_secure": "स्थान की सुविधा के लिए HTTPS ज़रूरी है। SafeReach को सुरक्षित साइट से खोलें या ZIP कोड से खोजें।",
+    "search.location_unsupported": "यह ब्राउज़र स्थान सुविधा का समर्थन नहीं करता। ZIP कोड से खोजें।",
+    "search.location_denied": "स्थान की अनुमति नहीं मिली। ब्राउज़र सेटिंग में अनुमति दें या ZIP कोड से खोजें।",
+    "search.location_unavailable": "आपका स्थान नहीं मिल सका। डिवाइस की स्थान सेवा जाँचें या ZIP कोड से खोजें।",
+    "search.location_timeout": "स्थान खोजने में बहुत समय लगा। फिर कोशिश करें या ZIP कोड से खोजें।",
+    "search.failed": "स्थान लोड नहीं हो सके। कनेक्शन जाँचें और फिर कोशिश करें।",
+
+    "filter.shelter": "शरण स्थल",
+    "filter.hospital": "अस्पताल",
+
+    "cap.ample": "{n} लोगों की जगह",
+    "cap.limited": "{n} लोगों की जगह",
+    "cap.critical": "{n} लोगों की जगह",
+    "cap.unknown": "क्षमता की जानकारी नहीं",
+    "cap.label.ample": "पर्याप्त जगह",
+    "cap.label.limited": "सीमित जगह",
+    "cap.label.critical": "लगभग भरा हुआ",
+    "cap.label.unknown": "अज्ञात",
+
+    "card.drive": "{miles} मील ड्राइव, {min} मिनट",
+    "card.straight": "{miles} मील दूर",
+    "card.directions": "दिशा-निर्देश",
+    "card.hide_directions": "दिशा-निर्देश छिपाएँ",
+    "card.show_map": "मानचित्र पर देखें",
+    "card.get_route": "रास्ता सहेजें",
+    "card.saving": "सहेजा जा रहा है",
+    "card.route_failed": "पुनः प्रयास",
+    "card.no_route": "रास्ता सहेजा नहीं गया",
+    "card.pets": "पालतू जानवर स्वीकार्य",
+    "card.source": "स्रोत: {name}",
+    "card.share_route_map": "रूट मैप साझा करें",
+    "route.preparing": "मैप इमेज तैयार हो रही है…",
+    "route.image_title": "रूट को मैप इमेज के रूप में साझा करें",
+    "route.steps_heading": "इस स्थान तक पहुँचने के चरण",
+    "route.no_steps": "इस मार्ग के लिए चरण-दर-चरण निर्देश उपलब्ध नहीं हैं।",
+    "route.more_steps": "{n} और चरण नहीं दिखाए गए",
+    "route.continue": "मार्ग पर आगे बढ़ें",
+    "route.share_hint": "डिवाइस का शेयर मेनू खोलें और उपलब्ध होने पर AirDrop, Quick Share, Bluetooth या कोई अन्य नज़दीकी विकल्प चुनें।",
+    "route.attribution_hint": "उपलब्ध होने पर मैप टाइल शामिल होंगी। ऑफ़लाइन होने पर सरल रूट ओवरव्यू बनाया जाएगा।",
+    "route.save_image": "इमेज सहेजें",
+    "route.share_airdrop": "Share image nearby",
+    "route.start": "शुरुआत",
+    "route.destination": "गंतव्य",
+    "route.summary": "ड्राइविंग रूट का सारांश",
+    "route.need_origin": "पहले आस-पास या ZIP कोड से खोजें ताकि रूट का शुरुआती स्थान तय हो सके।",
+    "route.need_route": "सहेजा हुआ रूट उपलब्ध नहीं है। इंटरनेट से जुड़कर फिर कोशिश करें।",
+    "route.image_failed": "रूट इमेज नहीं बन सकी। फिर कोशिश करें।",
+    "route.share_fallback": "यह ब्राउज़र सीधे फ़ाइल साझा नहीं कर सकता। PNG डाउनलोड हुई है; भेजने के लिए Files या Photos का शेयर मेनू इस्तेमाल करें.",
+
+    "empty.none": "आस-पास शरण स्थल खोजें। परिणाम ऑफ़लाइन उपयोग के लिए इस डिवाइस पर रहेंगे।",
+    "empty.filtered": "इन फ़िल्टर से कुछ मेल नहीं खाता।",
+
+    "share.close": "बंद करें",
+
+    "map.note": "मानचित्र छवियाँ हर क्षेत्र के लिए एक बार लोड होती हैं, फिर ऑफ़लाइन काम करती हैं। विवरण और दिशा-निर्देश हमेशा ऑफ़लाइन उपलब्ध रहते हैं।",
+
+    "nav.find": "खोजें",
+    "nav.locations": "स्थान",
+    "nav.settings": "सेटिंग्स",
+    "find.eyebrow": "आपातकालीन स्थान",
+    "find.title": "आस-पास सहायता खोजें",
+    "find.subtitle": "आश्रय स्थलों और अस्पतालों को खोजें। आपके हाल के परिणाम ऑफ़लाइन उपयोग के लिए इस डिवाइस पर उपलब्ध रहेंगे।",
+    "locations.eyebrow": "आस-पास के परिणाम",
+    "locations.title": "आस-पास के स्थान",
+    "locations.subtitle": "पिछली खोज में मिले आश्रय स्थलों और अस्पतालों को देखें।",
+    "search.loading": "आस-पास के स्थान लोड हो रहे हैं…",
+    "settings.last_saved": "कैश किए गए डेटा का समय: {time}",
+    "settings.eyebrow": "ऐप प्राथमिकताएँ",
+    "settings.title": "सेटिंग्स",
+    "settings.subtitle": "SafeReach का रूप और भाषा चुनें।",
+    "settings.language": "भाषा",
+    "settings.language_desc": "ऐप की भाषा बदलें।",
+    "settings.theme": "दिखावट",
+    "settings.theme_desc": "हल्का, गहरा या डिवाइस के अनुसार चुनें।",
+    "settings.offline_title": "ऑफ़लाइन मोड कैसे काम करता है",
+    "settings.offline_desc": "पहले से सहेजे गए स्थान और मानचित्र टाइल इंटरनेट के बिना भी इस डिवाइस पर रह सकते हैं। डेटा पुराना हो सकता है, इसलिए अपडेट समय देखें और संभव हो तो ज़रूरी जानकारी की पुष्टि करें।",
+    "settings.about_title": "इस ऐप के बारे में",
+
+    "theme.light": "हल्का",
+    "theme.dark": "गहरा",
+    "theme.system": "सिस्टम",
+    "lang.label": "भाषा",
+    "settings.no_saved": "अभी कोई डेटा सहेजा नहीं गया। इंटरनेट होने पर खोजें।",
+    "settings.about_desc": "SafeReach आस-पास के आपातकालीन स्थानों की स्थानीय कॉपी रखता है और डिवाइस के शेयर मेनू से मार्ग-मानचित्र की छवियाँ साझा करता है।"
+  }
+};
+
+const LANGS = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Español" },
+  { code: "zh", label: "中文" },
+  { code: "hi", label: "हिन्दी" }
+];
+
+let currentLang = "en";
+
+function detectLang() {
+  const saved = localStorage.getItem("lang");
+  if (saved && DICT[saved]) return saved;
+  const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  return DICT[nav] ? nav : "en";
+}
+
+function setLang(code) {
+  if (!DICT[code]) return;
+  currentLang = code;
+  localStorage.setItem("lang", code);
+  document.documentElement.lang = code;
+}
+
+function getLang() {
+  return currentLang;
+}
+
+function t(key, vars) {
+  let str = (DICT[currentLang] && DICT[currentLang][key]) || DICT.en[key] || key;
+  if (vars) {
+    for (const [k, v] of Object.entries(vars)) {
+      str = str.replace(new RegExp(`\\{${k}\\}`, "g"), v);
+    }
+  }
+  return str;
+}
+
+function translateDOM(root = document) {
+  root.querySelectorAll("[data-i18n]").forEach((node) => {
+    node.textContent = t(node.dataset.i18n);
+  });
+  root.querySelectorAll("[data-i18n-label]").forEach((node) => {
+    node.setAttribute("aria-label", t(node.dataset.i18nLabel));
+  });
+}
+
+window.I18N = { t, setLang, getLang, detectLang, translateDOM, LANGS };

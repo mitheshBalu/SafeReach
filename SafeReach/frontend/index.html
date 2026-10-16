@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>SafeReach</title>
+<meta name="theme-color" content="#061326" />
+<meta name="apple-mobile-web-app-title" content="SafeReach" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="styles.css" />
+<script>
+  (function () {
+    var saved = localStorage.getItem("theme") || "dark";
+    var dark = saved === "dark" ||
+      (saved === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+  })();
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <img class="brand-logo" src="icons/logo.png" alt="" width="48" height="48" />
+      <div class="brand-copy">
+      <h1 data-i18n="app.title">SafeReach</h1>
+      <p data-i18n="app.subtitle">Nearby shelters, saved to this device</p>
+      </div>
+    </div>
+    <div class="sync" id="sync" data-state="online">
+      <span class="sync-dot"></span>
+      <span id="sync-text"></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="app-nav" aria-label="Main navigation">
+    <button class="nav-item" data-page="find" aria-current="page"><span class="nav-icon" aria-hidden="true">⌕</span><span data-i18n="nav.find">Find</span></button>
+    <button class="nav-item" data-page="locations" aria-current="false"><span class="nav-icon" aria-hidden="true">⌖</span><span data-i18n="nav.locations">Locations</span></button>
+    <button class="nav-item" data-page="settings" aria-current="false"><span class="nav-icon" aria-hidden="true">⚙</span><span data-i18n="nav.settings">Settings</span></button>
+  </nav>
+  <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+
+  <section class="app-page" id="page-find" data-page-panel="find">
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow" data-i18n="find.eyebrow">EMERGENCY LOCATIONS</p>
+        <h2 data-i18n="find.title">Find help nearby</h2>
+        <p data-i18n="find.subtitle">Search for shelters and hospitals. Your last results remain available offline.</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="solid" id="near-me" aria-busy="false"><span class="button-label" data-i18n="search.near_me">Search near me</span><span class="button-spinner" aria-hidden="true" hidden></span></button>
+      <button id="by-zip" data-i18n="search.zip">Search by ZIP</button>
+      <button id="refresh" data-i18n="search.refresh" disabled>Refresh</button>
+      <label class="radius">
+        <span data-i18n="search.radius">Radius</span>
+        <input type="number" id="radius" value="50" min="5" max="200" inputmode="numeric" />
+        <span data-i18n="search.miles">mi</span>
+      </label>
+    </div>
+
+    <div id="map" aria-label="Map of nearby shelters and hospitals"></div>
+    <p class="map-note" data-i18n="map.note">Map images load once per area, then work offline. Details and directions always work offline.</p>
+  </section>
+
+  <section class="app-page" id="page-locations" data-page-panel="locations" hidden>
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow" data-i18n="locations.eyebrow">NEARBY RESULTS</p>
+        <h2 data-i18n="locations.title">Nearby locations</h2>
+        <p data-i18n="locations.subtitle">Browse shelters and hospitals found by your latest search.</p>
+      </div>
+    </div>
+    <div class="filters" id="filters" aria-label="Filter locations">
+      <button class="chip" data-cat="shelter" aria-pressed="true">
+        <span data-i18n="filter.shelter">Shelters</span><span class="count"></span>
+      </button>
+      <button class="chip" data-cat="hospital" aria-pressed="true">
+        <span data-i18n="filter.hospital">Hospitals</span><span class="count"></span>
+      </button>
+    </div>
+    <div class="loading-state" id="loading-indicator" role="status" aria-live="polite" hidden>
+      <span class="loading-spinner" aria-hidden="true"></span>
+      <span id="loading-text" data-i18n="search.loading">Loading nearby locations…</span>
+    </div>
+    <section class="results" id="results" aria-label="Nearby locations"></section>
+    <p class="empty" id="empty" data-i18n="empty.none"></p>
+    <p class="provenance" id="provenance"></p>
+  </section>
+
+  <section class="app-page" id="page-settings" data-page-panel="settings" hidden>
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow" data-i18n="settings.eyebrow">APP PREFERENCES</p>
+        <h2 data-i18n="settings.title">Settings</h2>
+        <p data-i18n="settings.subtitle">Choose how SafeReach looks and reads.</p>
+      </div>
+    </div>
+    <section class="feature-card settings-card">
+      <div class="setting-row"><div><label for="lang-picker" data-i18n="settings.language">Language</label><p data-i18n="settings.language_desc">Change the app language.</p></div><select class="picker" id="lang-picker" data-i18n-label="lang.label"></select></div>
+      <div class="setting-row"><div><label for="theme-picker" data-i18n="settings.theme">Appearance</label><p data-i18n="settings.theme_desc">Choose light, dark, or follow your device.</p></div><select class="picker" id="theme-picker"><option value="system" data-i18n="theme.system">System</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></div>
+    </section>
+    <section class="feature-card">
+      <h3 data-i18n="settings.offline_title">How offline mode works</h3>
+      <p data-i18n="settings.offline_desc">Previously saved locations and map tiles may remain on this device without internet. The data can be out of date, so check the updated time and verify critical information when possible.</p>
+      <p class="settings-meta" id="settings-last-updated"></p>
+    </section>
+    <section class="feature-card">
+      <h3 data-i18n="settings.about_title">About this app</h3>
+      <p data-i18n="settings.about_desc">SafeReach keeps a local copy of nearby emergency locations and lets you share route-map images through your device’s share menu.</p>
+      <p class="settings-meta">SafeReach · Version 1.4</p>
+    </section>
+  </section>
+</main>
+
+<div class="backdrop" id="route-image-sheet" hidden>
+  <div class="sheet route-image-sheet" role="dialog" aria-modal="true" aria-labelledby="route-image-title">
+    <h2 id="route-image-title" data-i18n="route.image_title">Share route as a map image</h2>
+    <p class="lede" id="route-image-caption" data-i18n="route.share_hint">Use your phone's Share menu to send this PNG with AirDrop or another nearby-sharing option.</p>
+    <img class="route-image-preview" id="route-image-preview" alt="Route map image with start and destination markers and turn-by-turn directions below the map" />
+    <p class="hint" data-i18n="route.attribution_hint">OpenStreetMap map tiles are included when available. If offline, a simplified route overview is generated.</p>
+    <div class="sheet-actions route-image-actions">
+      <button id="route-download-image" data-i18n="route.save_image">Save image</button>
+      <button class="solid" id="route-share-image" data-i18n="route.share_airdrop">Share image nearby</button>
+      <button id="route-image-close" data-i18n="share.close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="i18n.js"></script>
+<script src="store.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

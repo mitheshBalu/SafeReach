@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "note": "Last-resort offline snapshot. Served only when every live source fails. Replace these placeholders by running: python tools/snapshot.py <lat> <lon> <radius> which writes real results here.",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-74.2846, 40.5187] },
+      "properties": {
+        "id": "local-fords-ms",
+        "name": "Fords Middle School",
+        "address": "100 Fanning Street",
+        "city": "Fords",
+        "state": "NJ",
+        "zip": "08863",
+        "phone": "732-417-5400",
+        "capacity": 706,
+        "category": "shelter",
+        "type": "School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-74.2846, 40.5576] },
+      "properties": {
+        "id": "local-woodbridge-hs",
+        "name": "Woodbridge High School",
+        "address": "1 Kelly Street",
+        "city": "Woodbridge",
+        "state": "NJ",
+        "zip": "07095",
+        "phone": "732-602-8600",
+        "capacity": 850,
+        "category": "shelter",
+        "type": "School"
+      }
+    }
+  ]
+}

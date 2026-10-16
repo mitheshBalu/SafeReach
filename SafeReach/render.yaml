@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: safereach
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn --chdir backend app:app --bind 0.0.0.0:$PORT --workers 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
